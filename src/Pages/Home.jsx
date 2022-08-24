@@ -134,7 +134,9 @@ const Home = () => {
   },[data])
 
 const handelFilter = (e) => {
-  if(e.target.value !== ""){
+  if(e.target.value === ""){
+    setMainData(data)
+  }else{
     const filterData = data.filter(item => item.email.toLowerCase().includes(e.target.value.toLowerCase()) || item.number.toLowerCase().includes(e.target.value.toLowerCase()) ||item.region.toLowerCase().includes(e.target.value.toLowerCase()));
     setMainData(filterData)
   }
