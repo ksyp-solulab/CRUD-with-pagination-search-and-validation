@@ -4,8 +4,8 @@ const userSlice = createSlice({
     name: "User",
     initialState:{
         users: [],
-        loading: false,
-        dup: false,
+        isLoading: false,
+        isDuplicate: false,
         singleUser: {
                 "number": "",
                 "email": "",
@@ -15,10 +15,10 @@ const userSlice = createSlice({
     },
     reducers: {
         getUsers: (state) => {
-            state.loading = true;
+            state.isLoading = true;
         },
         getUsersSuccess: (state,acton) => {
-            state.loading = false;
+            state.isLoading = false;
             // cuentlly i am not doing anything on successfull loading of the user, "we can set users state from hear"
         },
         getUser: (state, action) => {
@@ -32,12 +32,12 @@ const userSlice = createSlice({
               }
         },
         clearDup: (state) => {
-            state.dup = false
+            state.isDuplicate = false
         },
         addUser: (state, action) => {
             const dep = state.users.find(obj => obj.email === action.payload.email);
             if(dep){
-             state.dup = true
+             state.isDuplicate = true
             }  else {
                 state.users = [action.payload, ...state.users];
             }
@@ -45,7 +45,7 @@ const userSlice = createSlice({
         updateUser: (state, action) => {
             const dep = state.users.find(obj => obj.email === action.payload.user.email);
             if(dep){
-                state.dup = true
+                state.isDuplicate = true
                }  else {
                 state.users = state.users.map((el) => el.id === action.payload.id ? action.payload.user : el)
             }
